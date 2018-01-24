@@ -2,7 +2,7 @@ name: example-lb
 namespace: com.example.stylebook
 version: "1.2"
 display-name: Example StyleBook for creating a load balancer
-description: Example StyleBook for creating a load balancer
+description: Example ss StyleBook for creating a load balancer
 schema-version: "1.0"
 import-stylebooks: 
   - 
