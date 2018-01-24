@@ -1,0 +1,58 @@
+name: example-file
+namespace: com.example.stylebook
+version: "1.0"
+display-name: Example StyleBook for creating a load balancer
+description: Example StyleBook for creating a load balancer
+schema-version: "1.0"
+import-stylebooks: 
+  - 
+    namespace: netscaler.nitro.config
+    version: "11.0"
+    prefix: ns
+parameters: 
+  - 
+    name: file1
+    label: "File1"
+    type: certfile
+    required: false
+  - 
+    name: file2
+    label: "File2"
+    description: "File2"
+    type: keyfile
+    required: false
+  - 
+    name: file3
+    label: "File3"
+    description: "File3"
+    type: file
+    required: false
+
+components:
+  - 
+    name: file1-comp
+    type: ns::systemfile
+    condition: $parameters.file1
+    properties: 
+      filename: $parameters.file1.filename
+      filelocation: "/nsconfig/ssl"
+      filecontent: base64($parameters.file1.contents)
+      fileencoding: "BASE64"
+  - 
+    name: file2-comp
+    type: ns::systemfile
+    condition: $parameters.file2
+    properties: 
+      filename: $parameters.file2.filename
+      filelocation: "/nsconfig/ssl"
+      filecontent: base64($parameters.file2.contents)
+      fileencoding: "BASE64"
+  - 
+    name: file3-comp
+    type: ns::systemfile
+    condition: $parameters.file3
+    properties: 
+      filename: $parameters.file3.filename
+      filelocation: "/nsconfig/ssl"
+      filecontent: base64($parameters.file3.contents)
+      fileencoding: "BASE64"

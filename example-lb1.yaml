@@ -1,0 +1,48 @@
+name: example-lb1
+namespace: com.example.stylebook
+version: "1.2"
+display-name: Example StyleBook for creating a load balancer
+description: Example StyleBook for creating a load balancer
+schema-version: "1.0"
+import-stylebooks: 
+  - 
+    namespace: netscaler.nitro.config
+    version: "11.0"
+    prefix: ns
+parameters: 
+  - 
+    name: vip-ipaddress
+    label: "IP Address"
+    type: ipaddress
+    required: true
+  - 
+    name: vip-ipaddress1
+    label: "IP Address1s"
+    type: ipaddress
+    required: true
+  - 
+    name: port
+    label: "Load Balancer IP Address"
+    description: "IP Address of the Load Balancer VIP"
+    type: tcp-port
+    gui:
+      updatable: false
+    required: true
+
+components:
+  -
+    name: components1
+    type: ns::lbvserver
+    properties: 
+      name: "test-lb2"
+      ipv46: $parameters.vip-ipaddress1
+      servicetype: "http"
+      port: $parameters.port
+  -
+    name: components2
+    type: ns::lbvserver
+    properties: 
+      name: "test-lb2"
+      ipv46: $parameters.vip-ipaddress1
+      servicetype: "http"
+      port: $parameters.port

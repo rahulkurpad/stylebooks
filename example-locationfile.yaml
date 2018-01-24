@@ -1,0 +1,32 @@
+name: example-locationfile
+namespace: com.example.stylebook
+version: "1.0"
+display-name: Example StyleBook for creating a load balancer
+description: Example StyleBook for creating a load balancer
+schema-version: "1.0"
+import-stylebooks: 
+  - 
+    namespace: netscaler.nitro.config
+    version: "12.0"
+    prefix: ns
+parameters: 
+  - 
+    name: locationfile
+    label: "locationfile"
+    type: file
+    required: false
+
+components:
+  - 
+    name: locationfile-file-comp
+    type: ns::systemfile
+    properties: 
+      filename: $parameters.locationfile.filename
+      filelocation: "/var/netscaler/"
+      filecontent: base64($parameters.locationfile.contents)
+      fileencoding: "BASE64"
+  - 
+    name: locationfile-comp
+    type: ns::locationfile
+    properties: 
+      Locationfile: str("/var/netscaler/") + $parameters.locationfile.filename
